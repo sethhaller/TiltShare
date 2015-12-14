@@ -40,4 +40,6 @@
         <item>@string/color_red</item>
         <item>@string/color_white</item>
     </string-array>
+
+    <string name="title_activity_main">Tilt Game</string>
 </resources>

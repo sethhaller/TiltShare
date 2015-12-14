@@ -33,7 +33,7 @@ android {
         versionCode 9
         versionName '1.0.8'
         applicationId 'com.thirteen.tilt'
-        minSdkVersion 17
+        minSdkVersion 22
     }
     buildTypes {
         release {
