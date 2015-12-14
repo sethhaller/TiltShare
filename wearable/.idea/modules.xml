@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/../Application/Application.iml" filepath="$PROJECT_DIR$/../Application/Application.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../WatchFace.iml" filepath="$PROJECT_DIR$/../WatchFace.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Wearable.iml" filepath="$PROJECT_DIR$/Wearable.iml" />
+    </modules>
+  </component>
+</project>
