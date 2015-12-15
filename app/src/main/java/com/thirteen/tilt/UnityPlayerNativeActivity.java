@@ -1,19 +1,29 @@
 package com.thirteen.tilt;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.common.api.ResultCallback;
+import com.google.android.gms.wearable.MessageApi;
+import com.google.android.gms.wearable.MessageEvent;
+import com.google.android.gms.wearable.Node;
+import com.google.android.gms.wearable.NodeApi;
+import com.google.android.gms.wearable.Wearable;
 import com.unity3d.player.*;
 import android.app.NativeActivity;
 import android.content.res.Configuration;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 
-public class UnityPlayerNativeActivity extends NativeActivity
+public class UnityPlayerNativeActivity extends NativeActivity implements GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener
 {
 	protected UnityPlayer mUnityPlayer; // don't change the name of this variable; referenced from native code
+	protected GoogleApiClient mGoogleApiClient;
 
 	// Setup activity layout
 	@Override protected void onCreate (Bundle savedInstanceState)
@@ -33,6 +43,12 @@ public class UnityPlayerNativeActivity extends NativeActivity
 
 		setContentView(mUnityPlayer);
 		mUnityPlayer.requestFocus();
+
+		mGoogleApiClient = new GoogleApiClient.Builder(this)
+				.addConnectionCallbacks(this)
+				.addOnConnectionFailedListener(this)
+				.addApi(Wearable.API)
+				.build();
 	}
 
 	// Quit Unity
@@ -54,6 +70,23 @@ public class UnityPlayerNativeActivity extends NativeActivity
 	{
 		super.onResume();
 		mUnityPlayer.resume();
+	}
+
+	@Override
+	protected void onStart()
+	{
+		super.onStart();
+		mGoogleApiClient.connect();
+	}
+
+	@Override
+	protected void onStop()
+	{
+		if (null != mGoogleApiClient && mGoogleApiClient.isConnected())
+		{
+			mGoogleApiClient.disconnect();
+		}
+		super.onStop();
 	}
 
 	// This ensures the layout will be correct.
@@ -84,4 +117,32 @@ public class UnityPlayerNativeActivity extends NativeActivity
 	@Override public boolean onKeyDown(int keyCode, KeyEvent event)   { return mUnityPlayer.injectEvent(event); }
 	@Override public boolean onTouchEvent(MotionEvent event)          { return mUnityPlayer.injectEvent(event); }
 	/*API12*/ public boolean onGenericMotionEvent(MotionEvent event)  { return mUnityPlayer.injectEvent(event); }
+
+	@Override
+	public void onConnectionSuspended(int i)
+	{
+
+	}
+
+	@Override
+	public void onConnected(Bundle bundle)
+	{
+		Wearable.NodeApi.getConnectedNodes(mGoogleApiClient).setResultCallback(new ResultCallback<NodeApi.GetConnectedNodesResult>()
+		{
+			@Override
+			public void onResult(NodeApi.GetConnectedNodesResult nodes)
+			{
+				for (Node node : nodes.getNodes())
+				{
+					Wearable.MessageApi.sendMessage(mGoogleApiClient, node.getId(), "/startActivity", null);
+				}
+			}
+		});
+	}
+
+	@Override
+	public void onConnectionFailed(ConnectionResult connectionResult)
+	{
+
+	}
 }
