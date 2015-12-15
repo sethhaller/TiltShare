@@ -13,3 +13,8 @@ allprojects {
         jcenter()
     }
 }
+
+ext {
+    appVersionCode = 9
+    appVersionName = "1.0.8"
+}

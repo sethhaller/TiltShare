@@ -1,10 +1,8 @@
 package com.thirteen.tilt;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.support.wearable.activity.WearableActivity;
-import android.support.wearable.view.WatchViewStub;
-import android.widget.TextView;
+import android.view.WindowManager;
 
 public class MainActivity extends WearableActivity
 {
@@ -15,6 +13,6 @@ public class MainActivity extends WearableActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        setAmbientEnabled();
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
     }
 }

@@ -14,7 +14,7 @@
  limitations under the License.
 -->
 <resources>
-    <string name="app_name">Watch Face for Tilt</string>
+    <string name="app_name">Tilt Game</string>
     <string name="analog_name">Watch Face for Tilt</string>
     <string name="digital_background_color">Background color</string>
     <string name="digital_config_name">Digital Watch Face Configuration</string>

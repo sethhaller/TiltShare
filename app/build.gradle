@@ -7,8 +7,8 @@ android {
         applicationId "com.thirteen.tilt"
         minSdkVersion 19
         targetSdkVersion 21
-        versionCode 9
-        versionName '1.0.8'
+        versionCode appVersionCode
+        versionName appVersionName
     }
     buildTypes {
         release {

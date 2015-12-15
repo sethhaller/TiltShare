@@ -30,8 +30,8 @@ android {
     compileSdkVersion 21
     buildToolsVersion '21.1.1'
     defaultConfig {
-        versionCode 9
-        versionName '1.0.8'
+        versionCode appVersionCode
+        versionName appVersionName
         applicationId 'com.thirteen.tilt'
         minSdkVersion 22
     }
