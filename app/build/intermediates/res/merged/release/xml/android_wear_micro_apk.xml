@@ -1,6 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<wearableApp package="com.thirteen.tilt">
-    <versionCode>9</versionCode>
-    <versionName>1.0.8</versionName>
-    <rawPathResId>android_wear_micro_apk</rawPathResId>
-</wearableApp><!-- From: file:/C:/Users/Seth.WESTCPM/Documents/Tilt1/app/build/generated/res/microapk/release/xml/android_wear_micro_apk.xml -->
